@@ -8,12 +8,13 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Model {
+public class DeviceManager {
 	public HashMap<String, Device> devices_map;
 	
-	public Model(){
-		devices_map = new HashMap<String, Device>();
+	public DeviceManager(){
+		//devices_map = new HashMap<String, Device>();
 		loadHashMap();
+		System.out.println("init map, " + devices_map.size() + "devices");
 		
 	}
 	

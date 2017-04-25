@@ -116,6 +116,28 @@ public class SSHManager {
 
 		return outputBuffer.toString();
 	}
+	
+	
+	
+	public String sendMoreCommands() {
+
+		try {
+			Channel channel = sesConnection.openChannel("shell");
+			channel.setInputStream(System.in);
+			channel.setOutputStream(System.out);
+			
+			channel.connect();
+			
+
+			
+
+		} catch (JSchException jschX) {
+			logWarning(jschX.getMessage());
+			return null;
+		}
+
+		return "";
+	}
 
 	public void close() {
 		sesConnection.disconnect();
@@ -150,7 +172,8 @@ public class SSHManager {
 		// call sendCommand for each command and the output
 		// (without prompts) is returned
 
-		String result = instance.sendCommand(command);
+		String result = instance.sendCommand("mkdir testtesttestetddd");
+		instance.sendCommand("ls");
 
 		
 		if(str.equals(tmp_command))
@@ -158,6 +181,40 @@ public class SSHManager {
 		// close only after all commands are sent
 
 		return result;
+		//assertEquals(expResult, result);
+	}
+	
+	public static void testMultiCommands(Device d) {
+		System.out.println("sendCommand");
+
+		/**
+		 * YOU MUST CHANGE THE FOLLOWING FILE_NAME: A FILE IN THE DIRECTORY
+		 * USER: LOGIN USER NAME PASSWORD: PASSWORD FOR THAT USER HOST: IP
+		 * ADDRESS OF THE SSH SERVER
+		 **/
+
+		String command = "ls";
+		String userName = d.username;
+		String password = d.password;
+		String connectionIP = d.ip;
+		SSHManager instance = new SSHManager(userName, password, connectionIP, "");
+		String errorMessage = instance.connect();
+		
+		if (errorMessage != null) {
+			System.out.println(errorMessage);
+			//fail();
+		}
+
+		String expResult = "\n";
+		// call sendCommand for each command and the output
+		// (without prompts) is returned
+
+		String result = instance.sendCommand("mkdir testtesttestetddd");
+		instance.sendCommand("ls");
+
+		
+
+
 		//assertEquals(expResult, result);
 	}
 
