@@ -1,0 +1,11 @@
+List of steps:
+ON YOUR COMPUTER:
+1.download eclipse
+2.git clone https://github.com/tomshabtay/LastProject.git
+3.import->gradle project
+
+
+ON THE VM:
+1.sudo apt-get install openssh-server openssh-client
+2.ifconfig(to get the ip)
+3(optional). make sure the service is up.
