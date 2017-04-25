@@ -10,6 +10,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import ssh.SSHManager;
+import view.Home;
 
 public class Server {
 	
@@ -20,6 +21,11 @@ public class Server {
 	public static Route stopServer = (Request request, Response response) -> {
 		stopServer();
 		return "Server Stoped";
+	};
+	
+	public static Route index = (Request request, Response response) -> {
+		
+		return Home.str;
 	};
 	
 	
@@ -45,6 +51,8 @@ public class Server {
 		
 		//Server functions
 		get("stop", stopServer);
+		get("", stopServer);
+		
 
 	}
 

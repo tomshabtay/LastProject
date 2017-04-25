@@ -25,8 +25,9 @@ public class Device implements Serializable {
 		this.connected = false;
 	}
 	
-	public void testConnection(){
-		ssh_manager.sendMoreCommands();
+	public String testConnection(){
+		String str = ssh_manager.sendMoreCommands();
+		return str;
 	}
 	
 	public void sendCommand(String command){

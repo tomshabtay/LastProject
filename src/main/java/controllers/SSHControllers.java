@@ -13,9 +13,9 @@ public class SSHControllers {
 		Device d = Server.device_manager.getDevice(request.params(":name"));
 		// String str = SSHManager.testSendCommand(d,"cd Desktop");
 		d.connect();
-		d.testConnection();
+		String result = d.testConnection();
 
-		return "device tested.";
+		return result;
 
 	};
 	
