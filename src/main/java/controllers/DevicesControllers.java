@@ -61,6 +61,21 @@ public class DevicesControllers {
 		
 		Device d = Server.model.getDevice(request.params(":name"));
 		String str = SSHManager.testSendCommand(d,"cd Desktop");
+		
+		return str;
+		
+		
+	    
+	};
+
+
+	public static Route index = (Request request, Response response) -> {
+		
+		
+		
+		
+		Device d = Server.model.getDevice(request.params(":name"));
+		String str = SSHManager.testSendCommand(d,"cd Desktop");
 		str = SSHManager.testSendCommand(d,"ls");
 		
 		return str;
@@ -68,6 +83,7 @@ public class DevicesControllers {
 		
 	    
 	};
+
 	
 
 }

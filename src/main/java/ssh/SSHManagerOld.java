@@ -9,9 +9,9 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SSHManager {
+public class SSHManagerOld {
 	
-	private static final Logger LOGGER = Logger.getLogger(SSHManager.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(SSHManagerOld.class.getName());
 	private JSch jschSSHChannel;
 	private String strUserName;
 	private String strConnectionIP;
@@ -35,20 +35,20 @@ public class SSHManager {
 		strConnectionIP = connectionIP;
 	}
 
-	public SSHManager(String userName, String password, String connectionIP, String knownHostsFileName) {
+	public SSHManagerOld(String userName, String password, String connectionIP, String knownHostsFileName) {
 		doCommonConstructorActions(userName, password, connectionIP, knownHostsFileName);
 		intConnectionPort = 22;
 		intTimeOut = 60000;
 	}
 
-	public SSHManager(String userName, String password, String connectionIP, String knownHostsFileName,
+	public SSHManagerOld(String userName, String password, String connectionIP, String knownHostsFileName,
 			int connectionPort) {
 		doCommonConstructorActions(userName, password, connectionIP, knownHostsFileName);
 		intConnectionPort = connectionPort;
 		intTimeOut = 60000;
 	}
 
-	public SSHManager(String userName, String password, String connectionIP, String knownHostsFileName,
+	public SSHManagerOld(String userName, String password, String connectionIP, String knownHostsFileName,
 			int connectionPort, int timeOutMilliseconds) {
 		doCommonConstructorActions(userName, password, connectionIP, knownHostsFileName);
 		intConnectionPort = connectionPort;
@@ -136,7 +136,7 @@ public class SSHManager {
 		String userName = d.username;
 		String password = d.password;
 		String connectionIP = d.ip;
-		SSHManager instance = new SSHManager(userName, password, connectionIP, "");
+		SSHManagerOld instance = new SSHManagerOld(userName, password, connectionIP, "");
 		String errorMessage = instance.connect();
 		
 		
