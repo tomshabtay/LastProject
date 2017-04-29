@@ -133,7 +133,7 @@ public class SSHManager {
 		String[] lines = new String[5];
 
 		try {
-			
+
 			Channel channel = sesConnection.openChannel("shell");
 			InputStream inStream = channel.getInputStream();
 			BufferedReader fromChannel = new BufferedReader(new InputStreamReader(inStream, "UTF-8"));
@@ -142,24 +142,90 @@ public class SSHManager {
 
 			channel.connect();
 			
-			for(int i = 0 ; i < 100 ; i++){
-				
-				
-			lines[i%5] = fromChannel.readLine();
-			System.out.println(i%5 + lines[i%5]);
 			
-			if(lines[i%5].equals("") && lines[i%5 - 1].startsWith("Last login")){
+			while(true){
+				System.out.println(fromChannel.readLine());
+				try {
+					Thread.sleep(1);
+					toChannel.println("ls\n");
+					toChannel.flush();
+					toChannel.println("cd Code\n");
+					toChannel.flush();
+					toChannel.println("cd ..\n");
+					toChannel.flush();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				
+				if(1 == 0) break;
+			}
 
-				toChannel.println("ls\n");
-				toChannel.flush();
-				System.out.println("EQUALS");
+			boolean ended = false;
+			int i = 0;
+			while (!ended) {
+
+				lines[i % 5] = fromChannel.readLine();
+				System.out.println(i % 5 + lines[i % 5]);
+
+				if (lines[i % 5].equals("") && lines[i % 5 - 1].startsWith("Last login")) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println("===== 1");
+					ended = true;
+				}
+
+				i++;
 			}
+
+			toChannel.println("ls\n");
+			toChannel.flush();
+			ended = false;
 			
-			
-			
-			
+			while (!ended) {
+
+				lines[i % 5] = fromChannel.readLine();
+				System.out.println(i % 5 + lines[i % 5]);
+
+				if (lines[i % 5].endsWith("$ ") && lines[i % 5 - 1].endsWith("$ ")) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					System.out.println("===== 2");
+					ended = true;
+				}
+				i++;
 			}
-			
+
+			toChannel.println("ls");
+			toChannel.flush();
+			ended = false;
+
+			while (!ended) {
+
+				lines[i % 5] = fromChannel.readLine();
+				System.out.println(i % 5 + lines[i % 5]);
+
+				if (lines[i % 5].endsWith("$ ")) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					ended = true;
+				}
+				i++;
+			}
+
 		} catch (JSchException | IOException jschX) {
 			logWarning(jschX.getMessage());
 			return null;

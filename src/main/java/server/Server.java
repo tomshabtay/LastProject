@@ -33,6 +33,7 @@ public class Server {
 	//Constructor
 	public Server() {
 		device_manager = new DeviceManager();
+		
 		setRoutes();
 	}
 

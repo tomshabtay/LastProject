@@ -13,5 +13,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="lib" path="libs/jsch-0.1.54.jar"/>
+	<classpathentry kind="lib" path="docs/spark-core-2.6.0.RC0-javadoc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
